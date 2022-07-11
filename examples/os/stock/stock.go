@@ -51,9 +51,9 @@ func main() {
 				Enabled: true,
 			},
 		},
-	}  //先看connect
+	}  //先看connect 
 
-	if err := h.Connect(); err != nil {
+	if err := h.Connect(); err != nil {  //这里虽然设定的是localhost，但是这一步实际会跳到connection.go中
 		panic(err)
 	}
 
