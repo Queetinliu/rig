@@ -179,16 +179,16 @@ func (c Connection) ExecOutput(cmd string, opts ...exec.Option) (string, error) 
 // Connect to the host and identify the operating system and sudo capability
 func (c *Connection) Connect() error {
 	if c.client == nil {
-		_ = defaults.Set(c)
+		_ = defaults.Set(c) //一开始为空值，进行初始化
 	}
 
-	if err := c.client.Connect(); err != nil {
+	if err := c.client.Connect(); err != nil {   //如果connect报错，返回错误
 		c.client = nil
 		return err
 	}
 
 	if c.OSVersion == nil {
-		o, err := GetOSVersion(c)
+		o, err := GetOSVersion(c)   //OSVersion为空，调用这个方法，同时将获取结果返回给c.OSVersion
 		if err != nil {
 			return err
 		}
