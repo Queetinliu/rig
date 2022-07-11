@@ -40,7 +40,7 @@ func (h *Host) LoadOS() error {
 		return err
 	}
 
-	h.Configurer = bf().(configurer)
+	h.Configurer = bf().(configurer)  //返回相应得struct，最终是运行对应的方法
 
 	return nil
 }
