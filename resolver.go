@@ -24,7 +24,7 @@ func GetOSVersion(c *Connection) (OSVersion, error) {
 	}
 	return OSVersion{}, fmt.Errorf("unable to determine host os")
 }
-
+//注意这里的init()函数，变量初始化后会首先执行这个。
 func init() {
 	Resolvers = append(Resolvers, resolveLinux, resolveWindows, resolveDarwin)
 }
