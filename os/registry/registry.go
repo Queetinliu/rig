@@ -5,7 +5,7 @@ import (
 
 	"github.com/k0sproject/rig"
 )
-
+//这里导入了rig包，会导入变量及执行初始化函数
 type buildFunc = func() interface{}
 type matchFunc = func(rig.OSVersion) bool
 
