@@ -17,7 +17,8 @@ import (
 	"github.com/k0sproject/rig"
 	"github.com/k0sproject/rig/os"
 	"github.com/k0sproject/rig/os/registry"
-	_ "github.com/k0sproject/rig/os/support"
+	_ "github.com/k0sproject/rig/os/support"  //注意这里导入这个库，同时会执行这个库的init()函数，实际就是注册了各个版本的matchFunc，buildFunc函数，这就是为啥
+	                                         //GetOSModuleBuilder能执行
 )
 
 type configurer interface {
