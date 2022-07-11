@@ -32,14 +32,14 @@ func init() {
 func resolveLinux(c *Connection) (os OSVersion, err error) {
 	if err = c.Exec("uname | grep -q Linux"); err != nil {
 		return
-	}
+	}  //执行这个如果不成功，返回空的OSVersion及err
 
 	output, err := c.ExecOutput("cat /etc/os-release || cat /usr/lib/os-release")
 	if err != nil {
 		return
-	}
+	}  //这里也是一样
 
-	err = parseOSReleaseFile(output, &os)
+	err = parseOSReleaseFile(output, &os) //方法在下面
 
 	return
 }
@@ -110,7 +110,7 @@ func unquote(s string) string {
 func parseOSReleaseFile(s string, os *OSVersion) error {
 	scanner := bufio.NewScanner(strings.NewReader(s))
 	for scanner.Scan() {
-		fields := strings.SplitN(scanner.Text(), "=", 2)
+		fields := strings.SplitN(scanner.Text(), "=", 2) //按=将其分成string，前面值是项，后面是值，类似NAME="CentOS Linux"，获取的值更新OSVersion
 		switch fields[0] {
 		case "ID":
 			os.ID = unquote(fields[1])
