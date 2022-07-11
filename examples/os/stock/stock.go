@@ -51,7 +51,7 @@ func main() {
 				Enabled: true,
 			},
 		},
-	}
+	}  //先看connect
 
 	if err := h.Connect(); err != nil {
 		panic(err)
