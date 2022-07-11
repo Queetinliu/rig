@@ -58,8 +58,8 @@ func (c *Localhost) Disconnect() {}
 
 // Exec executes a command on the host
 func (c *Localhost) Exec(cmd string, opts ...exec.Option) error {
-	o := exec.Build(opts...)
-	command, err := c.command(cmd, o)
+	o := exec.Build(opts...) //用第三方包先构建opts
+	command, err := c.command(cmd, o)  //方法在下面
 	if err != nil {
 		return err
 	}
@@ -79,13 +79,13 @@ func (c *Localhost) Exec(cmd string, opts ...exec.Option) error {
 		return err
 	}
 
-	o.LogCmd(name, cmd)
+	o.LogCmd(name, cmd) //打印出执行的命令
 
 	if err := command.Start(); err != nil {
 		return err
 	}
 	var wg sync.WaitGroup
-	wg.Add(1)
+	wg.Add(1)  //后面主要控制设置的输出
 	go func() {
 		defer wg.Done()
 
@@ -127,7 +127,7 @@ func (c *Localhost) command(cmd string, o *exec.Options) (*osexec.Cmd, error) {
 		return osexec.Command(cmd), nil
 	}
 
-	return osexec.Command("bash", "-c", "--", cmd), nil
+	return osexec.Command("bash", "-c", "--", cmd), nil //这里返回*Cmd,nil
 }
 
 // Upload copies a larger file to another path on the host.
