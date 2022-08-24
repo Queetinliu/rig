@@ -178,8 +178,8 @@ func (c Connection) ExecOutput(cmd string, opts ...exec.Option) (string, error) 
 
 // Connect to the host and identify the operating system and sudo capability
 func (c *Connection) Connect() error {
-	if c.client == nil {
-		_ = defaults.Set(c) //一开始为空值，调用上面的SetDefaults()进行初始化
+	if c.client == nil {   //如果client为空则初始化
+		_ = defaults.Set(c) //一开始为空值，调用defaults里的Set进行初始化
 	}
 
 	if err := c.client.Connect(); err != nil {   //如果connect报错，返回错误
