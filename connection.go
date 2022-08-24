@@ -81,7 +81,7 @@ type Connection struct {
 
 // SetDefaults sets a connection
 func (c *Connection) SetDefaults() {
-	if c.client == nil {
+	if c.client == nil {  //开始这个为空，调用这里的方法
 		c.client = c.configuredClient()
 		if c.client == nil {
 			c.client = defaultClient()
@@ -182,7 +182,7 @@ func (c *Connection) Connect() error {
 		_ = defaults.Set(c) //一开始为空值，调用defaults里的Set进行初始化
 	}
 
-	if err := c.client.Connect(); err != nil {   //如果connect报错，返回错误
+	if err := c.client.Connect(); err != nil {   //由于前面已将c.client设定为SSH,这里调用SSH里的方法；如果connect报错，返回错误
 		c.client = nil
 		return err
 	}
@@ -307,7 +307,7 @@ func (c *Connection) configuredClient() client {
 		return c.SSH
 	}
 
-	return nil
+	return nil //更新c.SSH
 }
 
 func defaultClient() client {
